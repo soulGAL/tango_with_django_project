@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load staticfiles %} <!-- New line -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Rango</title>
+</head>
+<body>
+    <h1>Rango says...</h1>
+    <div>
+        hey there partner! <br/>
+        <strong>{{ boldmessage }}</strong><br/>
+    </div>
+    <div>
+        {% if categories %} <!-- 如果categories不为空, 则执行下面的代码 -->
+             <ul>
+             {% for category in categories %}
+             <li>
+                    <!--<a href="/rango/category/{{ category.slug }}/">-->
+                 <a href="{% url 'rango:show_category' category.slug %}"> <!-- 这里的url是rango.urls中的url, 而不是django.urls中的url -->
+                        {{ category.name }}
+                    </a>
+             </li>
+             {% endfor %}
+             </ul>
+         {% else %}
+             <strong>There are no categories present.</strong>
+         {% endif %}
+    </div>
+
+    <div>
+        <a href="/rango/add_category/">Add a New Category</a><br />
+        <!--static 标签, 会在'images/rango.jpg'前面加上STATIC_URL的值, 也就是'/static/' -->
+        <img src="{% static 'images/1.png' %}"
+             alt="Picture of Rango" /> <!-- alt是图像的替代文本 -->
+    </div>
+</body>
+</html>

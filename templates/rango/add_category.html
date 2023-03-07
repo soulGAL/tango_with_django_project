@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Add a Category</h1>
+    <div>
+         <form id="category_form" method="post" action="/rango/add_category/">
+             {% csrf_token %}
+             {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+             {% endfor %}
+             {% for field in form.visible_fields %} <!-- form.visible_fields 是一个列表，包含了表单中的所有字段 -->
+                {{ field.errors }} <!-- field.errors 是一个列表，包含了字段的所有错误信息 -->
+                {{ field.help_text }} <!-- field.help_text 是一个字符串，包含了字段的帮助信息 -->
+                {{ field }} <!-- field 是一个字段对象，包含了字段的所有信息 -->
+             {% endfor %}
+             <input type="submit" name="submit" value="Create Category" />
+         </form>
+    </div>
+</body>
+</html>
